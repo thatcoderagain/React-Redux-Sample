@@ -1,13 +1,15 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from '../assets/images/logo.svg';
+import '../styles/App.css';
 
-function App() {
+import { connect } from "react-redux";
+
+function App(props) {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Edit <code>src/App.js</code> and save to reload. {props.auth}
         </p>
         <a
           className="App-link"
@@ -22,4 +24,8 @@ function App() {
   );
 }
 
-export default App;
+export default connect((state) => {
+    return {
+        auth: state.auth
+    }
+})(App);
