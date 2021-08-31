@@ -2,8 +2,10 @@ import logo from '../assets/images/logo.svg';
 import '../styles/App.css';
 
 import { connect } from "react-redux";
+import setAuth from "../store/actions/auth";
 
 function App(props) {
+  props.setAuth("Gaurav");
   return (
     <div className="App">
       <header className="App-header">
@@ -24,8 +26,16 @@ function App(props) {
   );
 }
 
-export default connect((state) => {
+const mapStateToProps = (state) => {
     return {
         auth: state.auth
     }
-})(App);
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setAuth: (user) => dispatch(setAuth(user)),
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
