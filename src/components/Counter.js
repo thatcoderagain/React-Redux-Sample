@@ -1,21 +1,11 @@
-import React, {useReducer} from 'react';
+import React, {useContext} from 'react';
 import Button from "./Button";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case 'INCREMENT':
-      return state+1;
-    case 'DECREMENT':
-      return state-1;
-    case 'RESET':
-      return 0;
-    default:
-      return state
-  }
-};
+import {CounterContext} from '../App';
 
 const Counter = (props) => {
-  const [count, dispatch] = useReducer(reducer, 0);
+  const counterContext = useContext(CounterContext);
+  console.log(counterContext);
+  const {count, dispatch} = counterContext;
   return (
     <div>
       {count}

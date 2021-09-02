@@ -6,11 +6,8 @@ const Theme = {
   primaryBackground: '#85e9ff'
 };
 
-export default function Button(props) {
-  const [visibility, setVisibility] = useState(true);
-  const [color, setColor] = useState(props.color || '#111111');
-  const [bgColor, setBgColor] = useState(props.bgColor || '#eeeeee');
-  const StyledButton = styled.button`
+const StyledButton = (props) => {
+   return styled.button`
     color: ${Theme['primaryColor']};
     border: 0.25rem solid ${Theme['primaryColor']};
     background-color: ${Theme['primaryBackground']};
@@ -28,12 +25,20 @@ export default function Button(props) {
       css`
         background-color: ${props.bgColor};
       `
-    };
+  };
       `;
+};
+
+export default function Button(props) {
+  const [visibility, setVisibility] = useState(true);
+  const [color, setColor] = useState(props.color || '#111111');
+  const [bgColor, setBgColor] = useState(props.bgColor || '#eeeeee');
+  const TheButton = StyledButton(props);
 
   const changeColor = () => {
     setColor('#'+Math.floor(Math.random()*16777215).toString(16));
     setBgColor('#'+Math.floor(Math.random()*16777215).toString(16));
+    props.onClick()
   };
 
   useEffect(() => {
@@ -49,6 +54,6 @@ export default function Button(props) {
 
 
   return (
-    <StyledButton {...props} color={color} bgColor={bgColor} onClick={changeColor}>{props.children}</StyledButton>
+    <TheButton {...props} color={color} bgColor={bgColor} onClick={changeColor}>{props.children}</TheButton>
   );
 }
